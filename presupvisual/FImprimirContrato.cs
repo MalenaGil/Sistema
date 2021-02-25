@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace presupvisual
+{
+    public partial class FImprimirContrato : Form
+    {
+        public FImprimirContrato()
+        {
+            InitializeComponent();
+        }
+
+        private void FImprimirContrato_Load(object sender, EventArgs e)
+        {
+            // TODO: esta línea de código carga datos en la tabla 'DataSetClientes.clientes' Puede moverla o quitarla según sea necesario.
+            this.clientesTableAdapter.Fill(this.DataSetClientes.clientes);
+
+            this.reportViewer1.RefreshReport();
+        }
+
+        private void BotonSalir_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Fclientes1 ss = new presupvisual.Fclientes1();
+            ss.Show();
+        }
+    }
+}

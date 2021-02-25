@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace sistemaslg
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            textBox1.Focus();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=TERMI\KAV_CS_ADMIN_KIT;Initial Catalog=terminados;User ID=sa;Password=$UPERVISOR2;");
+            //SqlConnection con = new SqlConnection(@"Data Source=LENOVO\SQLEXPRESS;Initial Catalog=terminados;Integrated Security=True;");
+            SqlDataAdapter sda = new SqlDataAdapter("select count(*) from acceso where clave='VENTAS1' and psw='" + textBox1.Text + "'", con);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows[0][0].ToString() == "1")
+            {
+                this.Hide();
+                menu ss = new sistemaslg.menu();
+                ss.Show();
+            }
+            else
+            {
+                MessageBox.Show("Revisa la Clave de acceso");
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.Show();
+            textBox1.Focus();
+        }
+    }
+}

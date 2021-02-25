@@ -1,0 +1,9 @@
+="Página: " & Globals!PageNumber & " de " & Globals!TotalPages
+
+="Fecha: "&Globals!ExecutionTime
+
+="Página: " & Globals!PageNumber
+
+="Total de clientes: " & Count(Fields!clte.Value)
+
+=Fields!calle.Value & " " & Fields!colonia.Value & " " & Fields!delega.Value &" "& Fields!estado.Value &" "& Fields!pais.Value

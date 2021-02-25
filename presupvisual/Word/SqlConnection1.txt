@@ -1,0 +1,37 @@
+
+Para servir:
+SqlConnection con = new SqlConnection(@"Data Source=SERVIR\COMPAC;Initial Catalog=litografia;User ID=sa;Password=$UPERVISOR1;");
+connectionString="Data Source=SERVIR\COMPAC;Initial Catalog=litografia;User ID=sa;Password=$UPERVISOR1;"
+connectionString="Data Source=LENOVO\SQLEXPRESS;Initial Catalog=litografia;Integrated Security=True;"
+
+
+Para termi:
+SqlConnection con = new SqlConnection(@"Data Source=TERMI\KAV_CS_ADMIN_KIT;Initial Catalog=terminados;User ID=sa;Password=$UPERVISOR2;");
+connectionString="Data Source=TERMI\KAV_CS_ADMIN_KIT;Initial Catalog=terminados;User ID=sa;Password=$UPERVISOR2;"
+connectionString="Data Source=LENOVO\SQLEXPRESS;Initial Catalog=terminados;Integrated Security=True;"
+
+Para LENOVO:
+SqlConnection con = new SqlConnection(@"Data Source=LENOVO\SQLEXPRESS;Initial Catalog=litografia;Integrated Security=True;");
+connectionString="Data Source=LENOVO\SQLEXPRESS;Initial Catalog=litografia;Integrated Security=True"
+
+--------------------------------------------------------------------------------
+            this.Close();
+
+
+            using System.Data.SqlClient;
+
+
+            SqlConnection con = new SqlConnection(@"Data Source=TERMI\KAV_CS_ADMIN_KIT;Initial Catalog=terminados;User ID=sa;Password=$UPERVISOR2;");
+            SqlDataAdapter sda = new SqlDataAdapter("select count(*) from acceso where clave='VENTAS1' and psw='" + textBox1.Text + "'",con);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows[0][0].ToString() == "1")
+            {
+                this.Hide();
+                menu ss = new sistemas.menu();
+                ss.Show();
+            }
+            else
+            {
+                MessageBox.Show("Reviza la contraseña");
+            }

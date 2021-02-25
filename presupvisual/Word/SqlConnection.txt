@@ -1,0 +1,681 @@
+namespace sistemaslg
+{
+    public partial class fclientes : Form
+    {
+        SqlConnection con = new SqlConnection(@"Data Source=TERMI\KAV_CS_ADMIN_KIT;Initial Catalog=terminados;User ID=sa;Password=$UPERVISOR2;");
+        //SqlConnection con = new SqlConnection(@"Data Source=LENOVO\SQLEXPRESS;Initial Catalog=terminados;Integrated Security=True;");
+        SqlCommand cmd = new SqlCommand();
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace sistemaslg
+{
+    public partial class fclientes : Form
+    {
+        SqlConnection con = new SqlConnection(@"Data Source=TERMI\KAV_CS_ADMIN_KIT;Initial Catalog=terminados;User ID=sa;Password=$UPERVISOR2;");
+        //SqlConnection con = new SqlConnection(@"Data Source=LENOVO\SQLEXPRESS;Initial Catalog=terminados;Integrated Security=True;");
+        SqlCommand cmd = new SqlCommand();
+
+        public fclientes()
+
+        {
+            InitializeComponent();
+            cmd.Connection = con;
+            this.Show();
+            txtclte.Focus();
+        }
+
+        public void ejecutar(string dato)
+        {
+            LBLcontra.Text = dato;
+        }
+
+        private void BTsalir_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            menu ss = new sistemaslg.menu();
+            ss.Show();
+        }
+
+
+        //private void fclientes_Load(object sender, EventArgs e)
+        //{
+        //    //cmd.Connection = con;
+        //    this.Show();
+        //    txtclte.Focus();
+        //}
+
+
+        private void BTprimero_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            txtrazon.Text = "";
+            txtcalle.Text = "";
+            txtnumext.Text = "";
+            txtnumint.Text = "";
+            txtcolonia.Text = "";
+            txtdelega.Text = "";
+            txtestado.Text = "";
+            txtpais.Text = "";
+            txtrfc.Text = "";
+            txtcp.Text = "";
+            txttelefono.Text = "";
+            txtemail.Text = "";
+            txtproveedor.Text = "";
+            txtvendedor.Text = "";
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select top(1) clte,razon,vendedor  from dbo.clientes order by clte";
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            DGclientes.DataSource = dt;
+            DGclientes.Columns[0].Width = 90;
+            DGclientes.Columns[1].Width = 350;
+            DGclientes.Columns[2].Width = 200;
+            SqlCommand cursor = new SqlCommand("select top(1) clte,razon,calle,numext,numint, " +
+                    "  colonia,delega,estado,pais,rfc,cp,telefono,email,proveedor,vendedor  from dbo.clientes order by clte", con);
+            SqlDataReader cursorleido = cursor.ExecuteReader();
+            while (cursorleido.Read())
+            {
+                txtclte.Text = cursorleido.GetString(0);
+                txtrazon.Text = cursorleido.GetString(1);
+                txtcalle.Text = cursorleido.GetString(2);
+                txtnumext.Text = cursorleido.GetString(3);
+                txtnumint.Text = cursorleido.GetString(4);
+                txtcolonia.Text = cursorleido.GetString(5);
+                txtdelega.Text = cursorleido.GetString(6);
+                txtestado.Text = cursorleido.GetString(7);
+                txtpais.Text = cursorleido.GetString(8);
+                txtrfc.Text = cursorleido.GetString(9);
+                txtcp.Text = cursorleido.GetString(10);
+                txttelefono.Text = cursorleido.GetString(11);
+                txtemail.Text = cursorleido.GetString(12);
+                txtproveedor.Text = cursorleido.GetString(13);
+                txtvendedor.Text = cursorleido.GetString(14);
+            }
+            con.Close();
+        }
+
+
+        private void BTultimo_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            txtrazon.Text = "";
+            txtcalle.Text = "";
+            txtnumext.Text = "";
+            txtnumint.Text = "";
+            txtcolonia.Text = "";
+            txtdelega.Text = "";
+            txtestado.Text = "";
+            txtpais.Text = "";
+            txtrfc.Text = "";
+            txtcp.Text = "";
+            txttelefono.Text = "";
+            txtemail.Text = "";
+            txtproveedor.Text = "";
+            txtvendedor.Text = "";
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select top(1) clte,razon,vendedor  from dbo.clientes order by clte desc";
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            DGclientes.DataSource = dt;
+            DGclientes.Columns[0].Width = 90;
+            DGclientes.Columns[1].Width = 350;
+            DGclientes.Columns[2].Width = 200;
+            SqlCommand cursor = new SqlCommand("select top(1) clte,razon,calle,numext,numint, " +
+                    " colonia,delega,estado,pais,rfc,cp,telefono,email,proveedor,vendedor from dbo.clientes order by clte desc", con);
+            SqlDataReader cursorleido = cursor.ExecuteReader();
+            while (cursorleido.Read())
+            {
+                txtclte.Text = cursorleido.GetString(0);
+                txtrazon.Text = cursorleido.GetString(1);
+                txtcalle.Text = cursorleido.GetString(2);
+                txtnumext.Text = cursorleido.GetString(3);
+                txtnumint.Text = cursorleido.GetString(4);
+                txtcolonia.Text = cursorleido.GetString(5);
+                txtdelega.Text = cursorleido.GetString(6);
+                txtestado.Text = cursorleido.GetString(7);
+                txtpais.Text = cursorleido.GetString(8);
+                txtrfc.Text = cursorleido.GetString(9);
+                txtcp.Text = cursorleido.GetString(10);
+                txttelefono.Text = cursorleido.GetString(11);
+                txtemail.Text = cursorleido.GetString(12);
+                txtproveedor.Text = cursorleido.GetString(13);
+                txtvendedor.Text = cursorleido.GetString(14);
+            }
+            con.Close();
+        }
+
+        private void BTanterior_Click(object sender, EventArgs e)
+        {
+            //int cuenta = DGclientes.RowCount;
+            //MessageBox.Show("cuenta= "+cuenta);
+            //int renglon = DGclientes.CurrentRow.Index;
+            con.Open();
+            txtrazon.Text = "";
+            txtcalle.Text = "";
+            txtnumext.Text = "";
+            txtnumint.Text = "";
+            txtcolonia.Text = "";
+            txtdelega.Text = "";
+            txtestado.Text = "";
+            txtpais.Text = "";
+            txtrfc.Text = "";
+            txtcp.Text = "";
+            txttelefono.Text = "";
+            txtemail.Text = "";
+            txtproveedor.Text = "";
+            txtvendedor.Text = "";
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select top 1 clte,razon,vendedor from dbo.clientes where clte < '" + txtclte.Text + "' order by clte desc ";
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            DGclientes.DataSource = dt;
+            int cuenta = DGclientes.RowCount;
+            if (cuenta == 0)
+            {
+                MessageBox.Show("Ya no hay registros", "Terminados Litográficos");
+            }
+            DGclientes.Columns[0].Width = 90;
+            DGclientes.Columns[1].Width = 350;
+            DGclientes.Columns[2].Width = 200;
+            SqlCommand cursor = new SqlCommand("select top 1 clte,razon,calle,numext,numint,  " +
+                    " colonia,delega,estado,pais,rfc,cp,telefono,email,proveedor,vendedor from dbo.clientes where clte < '" + txtclte.Text + "' order by clte desc ", con);
+            SqlDataReader cursorleido = cursor.ExecuteReader();
+            while (cursorleido.Read())
+            {
+                txtclte.Text = cursorleido.GetString(0);
+                txtrazon.Text = cursorleido.GetString(1);
+                txtcalle.Text = cursorleido.GetString(2);
+                txtnumext.Text = cursorleido.GetString(3);
+                txtnumint.Text = cursorleido.GetString(4);
+                txtcolonia.Text = cursorleido.GetString(5);
+                txtdelega.Text = cursorleido.GetString(6);
+                txtestado.Text = cursorleido.GetString(7);
+                txtpais.Text = cursorleido.GetString(8);
+                txtrfc.Text = cursorleido.GetString(9);
+                txtcp.Text = cursorleido.GetString(10);
+                txttelefono.Text = cursorleido.GetString(11);
+                txtemail.Text = cursorleido.GetString(12);
+                txtproveedor.Text = cursorleido.GetString(13);
+                txtvendedor.Text = cursorleido.GetString(14);
+            }
+            con.Close();
+        }
+
+        private void BTsiguiente_Click(object sender, EventArgs e)
+        {
+            //int cuenta = DGclientes.RowCount;
+            //MessageBox.Show("cuenta= " + cuenta);
+            //int renglon = DGclientes.CurrentRow.Index;           
+            con.Open();
+            txtrazon.Text = "";
+            txtcalle.Text = "";
+            txtnumext.Text = "";
+            txtnumint.Text = "";
+            txtcolonia.Text = "";
+            txtdelega.Text = "";
+            txtestado.Text = "";
+            txtpais.Text = "";
+            txtrfc.Text = "";
+            txtcp.Text = "";
+            txttelefono.Text = "";
+            txtemail.Text = "";
+            txtproveedor.Text = "";
+            txtvendedor.Text = "";
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select top 1 clte,razon,vendedor from dbo.clientes where clte > '" + txtclte.Text + "' order by clte ";
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            DGclientes.DataSource = dt;
+            int cuenta = DGclientes.RowCount;
+            if (cuenta == 0)
+            {
+                MessageBox.Show("Ya no hay registros", "Terminados Litográficos");
+            }
+            DGclientes.Columns[0].Width = 90;
+            DGclientes.Columns[1].Width = 350;
+            DGclientes.Columns[2].Width = 200;
+            SqlCommand cursor = new SqlCommand("select top 1 clte,razon,calle,numext,numint, " +
+                    "  colonia,delega,estado,pais,rfc,cp,telefono,email,proveedor,vendedor from dbo.clientes where clte > '" + txtclte.Text + "'  order by clte", con);
+            SqlDataReader cursorleido = cursor.ExecuteReader();
+            while (cursorleido.Read())
+            {
+                txtclte.Text = cursorleido.GetString(0);
+                txtrazon.Text = cursorleido.GetString(1);
+                txtcalle.Text = cursorleido.GetString(2);
+                txtnumext.Text = cursorleido.GetString(3);
+                txtnumint.Text = cursorleido.GetString(4);
+                txtcolonia.Text = cursorleido.GetString(5);
+                txtdelega.Text = cursorleido.GetString(6);
+                txtestado.Text = cursorleido.GetString(7);
+                txtpais.Text = cursorleido.GetString(8);
+                txtrfc.Text = cursorleido.GetString(9);
+                txtcp.Text = cursorleido.GetString(10);
+                txttelefono.Text = cursorleido.GetString(11);
+                txtemail.Text = cursorleido.GetString(12);
+                txtproveedor.Text = cursorleido.GetString(13);
+                txtvendedor.Text = cursorleido.GetString(14);
+            }
+            con.Close();
+        }
+
+        private void BTconsulta_Click(object sender, EventArgs e)
+        {
+            if (txtclte.Text == "")
+            {
+                MessageBox.Show("Falta poner la clave del cliente...!");
+            }
+            else
+            {
+                con.Close();
+                con.Open();
+                txtrazon.Text = "";
+                txtcalle.Text = "";
+                txtnumext.Text = "";
+                txtnumint.Text = "";
+                txtcolonia.Text = "";
+                txtdelega.Text = "";
+                txtestado.Text = "";
+                txtpais.Text = "";
+                txtrfc.Text = "";
+                txtcp.Text = "";
+                txttelefono.Text = "";
+                txtemail.Text = "";
+                txtproveedor.Text = "";
+                txtvendedor.Text = "";
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "select clte,razon,vendedor from dbo.clientes where clte like '" + txtclte.Text + "%' ";
+                cmd.ExecuteNonQuery();
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    DGclientes.DataSource = dt;
+                    DGclientes.Columns[0].Width = 90;
+                    DGclientes.Columns[1].Width = 350;
+                    DGclientes.Columns[2].Width = 200;
+                    SqlCommand cursor = new SqlCommand("select clte,razon,calle,numext,numint,colonia, " +
+                    "  delega,estado,pais,rfc,cp,telefono,email,proveedor,vendedor " +
+                    "  from dbo.clientes where clte = '" + txtclte.Text + "' ", con);
+                    SqlDataReader cursorleido = cursor.ExecuteReader();
+                    while (cursorleido.Read())
+                    {
+                        txtclte.Text = cursorleido.GetString(0);
+                        txtrazon.Text = cursorleido.GetString(1);
+                        txtcalle.Text = cursorleido.GetString(2);
+                        txtnumext.Text = cursorleido.GetString(3);
+                        txtnumint.Text = cursorleido.GetString(4);
+                        txtcolonia.Text = cursorleido.GetString(5);
+                        txtdelega.Text = cursorleido.GetString(6);
+                        txtestado.Text = cursorleido.GetString(7);
+                        txtpais.Text = cursorleido.GetString(8);
+                        txtrfc.Text = cursorleido.GetString(9);
+                        txtcp.Text = cursorleido.GetString(10);
+                        txttelefono.Text = cursorleido.GetString(11);
+                        txtemail.Text = cursorleido.GetString(12);
+                        txtproveedor.Text = cursorleido.GetString(13);
+                        txtvendedor.Text = cursorleido.GetString(14);
+                    }
+                    con.Close();
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró el cliente: '" + txtclte.Text + "' ", "Terminados Litográficos");
+                }
+                con.Close();
+            }
+
+        }
+
+        private void BTconsgral_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select clte,razon,vendedor from dbo.clientes order by clte";
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            DGclientes.DataSource = dt;
+            DGclientes.Columns[0].Width = 90;
+            DGclientes.Columns[1].Width = 350;
+            DGclientes.Columns[2].Width = 200;
+
+            SqlCommand cursor = new SqlCommand("select top(1) clte,razon,calle,numext,numint, " +
+              " colonia,delega,estado,pais,rfc,cp,telefono,email,proveedor,vendedor from dbo.clientes order by clte", con);
+            SqlDataReader cursorleido = cursor.ExecuteReader();
+            while (cursorleido.Read())
+            {
+                txtclte.Text = cursorleido.GetString(0);
+                txtrazon.Text = cursorleido.GetString(1);
+                txtcalle.Text = cursorleido.GetString(2);
+                txtnumext.Text = cursorleido.GetString(3);
+                txtnumint.Text = cursorleido.GetString(4);
+                txtcolonia.Text = cursorleido.GetString(5);
+                txtdelega.Text = cursorleido.GetString(6);
+                txtestado.Text = cursorleido.GetString(7);
+                txtpais.Text = cursorleido.GetString(8);
+                txtrfc.Text = cursorleido.GetString(9);
+                txtcp.Text = cursorleido.GetString(10);
+                txttelefono.Text = cursorleido.GetString(11);
+                txtemail.Text = cursorleido.GetString(12);
+                txtproveedor.Text = cursorleido.GetString(13);
+                txtvendedor.Text = cursorleido.GetString(14);
+            }
+            con.Close();
+
+        }
+
+        private void BTconsporrazon_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select clte,razon,vendedor from dbo.clientes order by razon";
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            DGclientes.DataSource = dt;
+            DGclientes.Columns[0].Width = 90;
+            DGclientes.Columns[1].Width = 350;
+            DGclientes.Columns[2].Width = 200;
+
+            SqlCommand cursor = new SqlCommand("select top(1) clte,razon,calle,numext,numint, " +
+              " colonia,delega,estado,pais,rfc,cp,telefono,email,proveedor,vendedor from dbo.clientes order by razon", con);
+            SqlDataReader cursorleido = cursor.ExecuteReader();
+            while (cursorleido.Read())
+            {
+                txtclte.Text = cursorleido.GetString(0);
+                txtrazon.Text = cursorleido.GetString(1);
+                txtcalle.Text = cursorleido.GetString(2);
+                txtnumext.Text = cursorleido.GetString(3);
+                txtnumint.Text = cursorleido.GetString(4);
+                txtcolonia.Text = cursorleido.GetString(5);
+                txtdelega.Text = cursorleido.GetString(6);
+                txtestado.Text = cursorleido.GetString(7);
+                txtpais.Text = cursorleido.GetString(8);
+                txtrfc.Text = cursorleido.GetString(9);
+                txtcp.Text = cursorleido.GetString(10);
+                txttelefono.Text = cursorleido.GetString(11);
+                txtemail.Text = cursorleido.GetString(12);
+                txtproveedor.Text = cursorleido.GetString(13);
+                txtvendedor.Text = cursorleido.GetString(14);
+            }
+            con.Close();
+
+        }
+
+        private void BTconsporvendedor_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select clte,razon,vendedor from dbo.clientes order by vendedor";
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            DGclientes.DataSource = dt;
+            DGclientes.Columns[0].Width = 90;
+            DGclientes.Columns[1].Width = 350;
+            DGclientes.Columns[2].Width = 200;
+
+            SqlCommand cursor = new SqlCommand("select top(1) clte,razon,calle,numext,numint, " +
+              " colonia,delega,estado,pais,rfc,cp,telefono,email,proveedor,vendedor from dbo.clientes order by vendedor", con);
+            SqlDataReader cursorleido = cursor.ExecuteReader();
+            while (cursorleido.Read())
+            {
+                txtclte.Text = cursorleido.GetString(0);
+                txtrazon.Text = cursorleido.GetString(1);
+                txtcalle.Text = cursorleido.GetString(2);
+                txtnumext.Text = cursorleido.GetString(3);
+                txtnumint.Text = cursorleido.GetString(4);
+                txtcolonia.Text = cursorleido.GetString(5);
+                txtdelega.Text = cursorleido.GetString(6);
+                txtestado.Text = cursorleido.GetString(7);
+                txtpais.Text = cursorleido.GetString(8);
+                txtrfc.Text = cursorleido.GetString(9);
+                txtcp.Text = cursorleido.GetString(10);
+                txttelefono.Text = cursorleido.GetString(11);
+                txtemail.Text = cursorleido.GetString(12);
+                txtproveedor.Text = cursorleido.GetString(13);
+                txtvendedor.Text = cursorleido.GetString(14);
+            }
+            con.Close();
+
+        }
+
+        private void BTlimpiar_Click(object sender, EventArgs e)
+        {
+            txtclte.Text = "";
+            txtrazon.Text = "";
+            txtnombre.Text = "";
+            txtapellidop.Text = "";
+            txtapellidom.Text = "";
+            txtcalle.Text = "";
+            txtnumext.Text = "";
+            txtnumint.Text = "";
+            txtcolonia.Text = "";
+            txtdelega.Text = "";
+            txtestado.Text = "";
+            txtpais.Text = "";
+            txtrfc.Text = "";
+            txtcp.Text = "";
+            txttelefono.Text = "";
+            txtemail.Text = "";
+            txtproveedor.Text = "";
+            txtvendedor.Text = "";
+            txtclte.Focus();
+        }
+
+        private void BTgrabar_Click(object sender, EventArgs e)
+        {
+            if (txtclte.Text != "")
+            {
+                con.Open();
+                SqlCommand cursor = new SqlCommand("select clte from dbo.clientes where clte = '" + txtclte.Text + "' ", con);
+                SqlDataReader cursorleido = cursor.ExecuteReader();
+                if (cursorleido.Read())
+                {
+                    MessageBox.Show("El cliente: '" + txtclte.Text + "' ya existe..!", "Terminados Litográficos");
+                    con.Close();
+                }
+                else
+                {
+                    con.Close();
+                    con.Open();
+                    cmd.CommandText = "insert into dbo.clientes (clte,razon,calle,numext,numint) " +
+                    " values " +
+                    " ('" + txtclte.Text + "','" + txtrazon.Text + "','" + txtcalle.Text + "','" + txtnumext.Text + "','" + txtnumint.Text + "')";
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "update dbo.clientes set  " +
+                    " colonia = '" + txtcolonia.Text + "',  " +
+                    " delega = '" + txtdelega.Text + "',  " +
+                    " estado = '" + txtestado.Text + "',  " +
+                    " pais = '" + txtpais.Text + "',  " +
+                    " rfc = '" + txtrfc.Text + "',  " +
+                    " cp = '" + txtcp.Text + "',  " +
+                    " telefono = '" + txttelefono.Text + "',  " +
+                    " email = '" + txtemail.Text + "',  " +
+                    " proveedor = '" + txtproveedor.Text + "',  " +
+                    " vendedor = '" + txtvendedor.Text + "' where " +
+                    " clte = '" + txtclte.Text + "' ";
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Cliente creado...!", "Terminados Litográficos");
+                    con.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Falta poner la clave del cliente...!");
+            }
+        }
+
+        private void BTborrar_Click(object sender, EventArgs e)
+        {
+            if (txtclte.Text == "")
+            {
+                MessageBox.Show("Falta poner la clave del cliente...!");
+            }
+            else
+            {
+                // Checa contraseña:
+                fcontra fcontra1 = new fcontra();
+                fcontra1.pasado += new fcontra.pasar(ejecutar);
+                fcontra1.ShowDialog();
+                if (LBLcontra.Text == "contra")
+                {
+                    con.Open();
+                    cmd.CommandText = "delete from dbo.clientes where clte = '" + txtclte.Text + "' ";
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Cliente borrado...!", "Terminados Litográficos");
+                    con.Close();
+                    txtclte.Text = "";
+                    txtrazon.Text = "";
+                    txtcalle.Text = "";
+                    txtnumext.Text = "";
+                    txtnumint.Text = "";
+                    txtcolonia.Text = "";
+                    txtdelega.Text = "";
+                    txtestado.Text = "";
+                    txtpais.Text = "";
+                    txtrfc.Text = "";
+                    txtcp.Text = "";
+                    txttelefono.Text = "";
+                    txtemail.Text = "";
+                    txtproveedor.Text = "";
+                    txtvendedor.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("Contraseña incorrecta...!");
+                }
+            }
+
+        }
+
+        private void BTmodifica_Click(object sender, EventArgs e)
+        {
+            if (txtclte.Text == "")
+            {
+                MessageBox.Show("Falta poner la clave del cliente...!");
+            }
+            else
+            {
+                // Checa contraseña:
+                fcontra fcontra1 = new fcontra();
+                fcontra1.pasado += new fcontra.pasar(ejecutar);
+                fcontra1.ShowDialog();
+                if (LBLcontra.Text == "modifi")
+                {
+                    con.Open();
+                    cmd.CommandText = "update dbo.clientes set  " +
+                    " razon = '" + txtrazon.Text + "',  " +
+                    " calle = '" + txtcalle.Text + "',  " +
+                    " numext = '" + txtnumext.Text + "',  " +
+                    " numint = '" + txtnumint.Text + "',  " +
+                    " colonia = '" + txtcolonia.Text + "',  " +
+                    " delega = '" + txtdelega.Text + "',  " +
+                    " estado = '" + txtestado.Text + "',  " +
+                    " pais = '" + txtpais.Text + "',  " +
+                    " rfc = '" + txtrfc.Text + "',  " +
+                    " cp = '" + txtcp.Text + "',  " +
+                    " telefono = '" + txttelefono.Text + "',  " +
+                    " email = '" + txtemail.Text + "',  " +
+                    " proveedor = '" + txtproveedor.Text + "',  " +
+                    " vendedor = '" + txtvendedor.Text + "' where " +
+                    " clte = '" + txtclte.Text + "' ";
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Cliente modificado...!", "Terminados Litográficos");
+                    con.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Contraseña incorrecta...!");
+                }
+            }
+
+        }
+
+        private void BTreporte_Click(object sender, EventArgs e)
+        {
+            this.SendToBack();
+            txtclte.Focus();
+            rclientes ss = new sistemaslg.rclientes();
+            ss.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.SendToBack();
+            txtclte.Focus();
+            rclientesrazon ss = new sistemaslg.rclientesrazon();
+            ss.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.SendToBack();
+            txtclte.Focus();
+            rclientesvendedor ss = new sistemaslg.rclientesvendedor();
+            ss.Show();
+        }
+    }
+}
+
+
+
+
+using System.Windows.Forms;
+
+using System.Data.SqlClient;
+
+
+
+Para servir:
+SqlConnection con = new SqlConnection(@"Data Source=SERVIR\COMPAC;Initial Catalog=litografia;User ID=sa;Password=$UPERVISOR1;");
+
+Para termi:
+SqlConnection con = new SqlConnection(@"Data Source=TERMI\KAV_CS_ADMIN_KIT;Initial Catalog=terminados;User ID=sa;Password=$UPERVISOR2;");
+
+Para LENOVO:
+SqlConnection con = new SqlConnection(@"Data Source=LENOVO\SQLEXPRESS;Initial Catalog=litografia;Integrated Security=True;");
+--------------------------------------------------------------------------------
+            this.Close();
+
+
+            using System.Data.SqlClient;
+
+
+            SqlConnection con = new SqlConnection(@"Data Source=TERMI\KAV_CS_ADMIN_KIT;Initial Catalog=terminados;User ID=sa;Password=$UPERVISOR2;");
+            SqlDataAdapter sda = new SqlDataAdapter("select count(*) from acceso where clave='VENTAS1' and psw='" + textBox1.Text + "'",con);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows[0][0].ToString() == "1")
+            {
+                this.Hide();
+                menu ss = new sistemas.menu();
+                ss.Show();
+            }
+            else
+            {
+                MessageBox.Show("Reviza la contraseña");
+            }

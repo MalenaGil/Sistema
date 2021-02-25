@@ -1,0 +1,5 @@
+Para instalar el Reporviewer en Visual studio
+
+Install-Package Microsoft.ReportingServices.ReportViewerControl.WinForms
+
+https://www.youtube.com/watch?v=tduCH4e9QAA
